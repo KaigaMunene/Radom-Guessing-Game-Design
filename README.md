@@ -1,2 +1,2 @@
-# Radom-Number-Guessing-Game-Design
+# Random-Number-Guessing-Game-Design
 HTML,CSS &amp; JS for project
