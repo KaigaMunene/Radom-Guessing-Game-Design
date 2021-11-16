@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.head1 {
+    color:orangered;
+    text-align: center;
+}
+
+.head2 {
+    color: aqua;
+    text-align: center;
+}
+
+.p2 {
+   display: block;
+   color:blanchedalmond;
+    text-align: center;
+}
+
+.p1 {
+    color:white;
+    text-align: center;
+}
+
+.body{
+    background: url(wp3191510-gaming-logo-wallpaper.jpg) no-repeat;
+    background-size: cover;
+    padding: 15px;
+    position: relative;
+    
+}
+
+.body2 {
+    background: url(Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px;
+    position: relative;
+}
+/*img {
+    height: 30%;
+    width: 60%;
+    display: block;
+    transform: rotate(270deg);
+    float: right;
+    border: 1px solid grey;
+    text-align: right;
+}
+*/
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-color:orange;
+}
+
+.logo {
+    color: whitesmoke;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.mynav {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+
+.mynav li{
+    list-style-type: none;
+}
+
+.mynav a{
+    text-decoration: none;
+    color:whitesmoke;
+    letter-spacing: 2px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn {
+    position: fixed;
+    bottom: 10%;
+    left: 45%;
+    background-color: rgb(255, 123, 0);
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn:hover {background-color: #39b959}
+    
+    
