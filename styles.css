@@ -2,62 +2,111 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} 
 
 
 .head1 {
-    color:orangered;
+    color: #ffb703;
     text-align: center;
 }
 
 .head2 {
-    color: aqua;
+    color: rgba(0, 255, 255, 0.582);
     text-align: center;
 }
 
-.p2 {
-   display: block;
-   color:blanchedalmond;
+.head3 {
+    text-align: center;
+    color: rgba(179, 245, 240, 0.884);
+}
+
+.input-header {
+    color: rgba(245, 222, 179, 0.658);
+    padding: 2em;
     text-align: center;
 }
 
 .p1 {
-    color:white;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #219ebc;
+    font-size: 1.5em;
 }
 
+.p2 {
+    color:rgb(206, 206, 206);
+   padding: 2em;
+   text-align: justify;
+   font-size: 18px;
+}
+
+.p3 {
+    padding: 2em;
+    color: rgba(245, 222, 179, 0.877) ;
+    text-align: justify;
+}
+
+.h2{
+    color: rgba(245, 222, 179, 0.884);
+}
+
+h3 {
+    text-decoration: none;
+}
+
+@media (min-width: 480px) and (max-width: 1024px) {
+    .body {
+        background-image: url(Images/GUESS\ THE\ NUMBER\ \(1\).png);
+    }
+}
+@media (min-width: 1025px) {
+    .body {
+	    background-image: url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
+   }
+}
 .body{
-    background: url(wp3191510-gaming-logo-wallpaper.jpg) no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
     padding: 15px;
     position: relative;
-    
 }
 
 .body2 {
-    background: url(Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
+    background: linear-gradient(180deg, #000000a6, #000000a6), url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
+    background-position: top;
+    background-size: cover;
+    padding: 10px;
+}
+
+.instructions {
+    background: linear-gradient(#ff106023, #ffac0623),
+    url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     padding: 10px;
     position: relative;
-}
-/*img {
-    height: 30%;
-    width: 60%;
-    display: block;
-    transform: rotate(270deg);
-    float: right;
-    border: 1px solid grey;
-    text-align: right;
-}
-*/
 
+}
+
+.input {
+    background: linear-gradient(#ff106000, #ffac0634),
+    url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px;
+    position: relative; 
+}
+.input-nav{
+    position: fixed;
+    width: 100%;
+}
 nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-family: 'Poppins', sans-serif;
-    background-color:orange;
+    background-color: #FB8500;
 }
 
 .logo {
@@ -91,14 +140,113 @@ nav {
     left: 45%;
     background-color: rgb(255, 123, 0);
     color: black;
+    text-align: center;
     font-size: 16px;
     padding: 16px 30px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+   
+}
+
+.btn:hover {background-color: #39a6b9}
+    
+.container {
+    width: 360px;
+    height: 400px;
+    margin: 8% auto;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+#range-label{
+    text-align: center;
+    margin-bottom: 40px;
+    color: #777;
+}
+.container form{
+    width: 280px;
+    position: absolute;
+    top: 100px;
+    left: 40px;
+}
+
+form input{
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+::placeholder{
+    color: #777 ;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
     text-align: center;
 }
 
-.btn:hover {background-color: #39b959}
-    
-    
+.container button {
+    width: 110px;
+    height: 35px;
+    margin: 0 10px;
+    background: linear-gradient(to right, #ff105f, #ffad06);
+    border-radius: 30px;
+    border: 0;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+#form-2{
+    left:450px;
+
+}
+
+ #score{
+  display: none;
+} 
+
+.step-row{
+    width: 360px;
+    height: 40px;
+    margin: 0 auto;
+    display:flex;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+}
+
+.step-col{
+    width: 120px;
+    text-align: center;
+    color: #333;
+    position: relative;
+}
+
+#progress{
+    position:absolute;
+    height: 100%;
+    width:120px;
+    background: linear-gradient(to right, #ff105f, #ffad06);
+    transition: 1s;
+}
+
+#progress::after{
+    content: '';
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    position:absolute;
+    right: -20px;
+    top: 0;
+    border-left: 20px solid #ffad06;
+}

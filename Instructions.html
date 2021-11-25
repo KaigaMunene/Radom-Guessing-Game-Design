@@ -7,40 +7,46 @@
     <title>Instructions</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <nav>
+<body class="instructions">
+    
+    <nav id="nav">
         <div class="logo">
-            <h3>Navigation</h3>
+            <a href="index.html" class="h3"><h3>Guessing-Game</h3></a>
         </div>
         <ul class="mynav">
             <li><a href="index.html">Home</a></li>
             <li><a href="About.html">About</a></li>
             <li><a href="Instructions.html">Instructions</a></li>
-            <li><a href="#">Score</a></li>
         </ul>
     </nav>
 
     <h1 class="head3">Instructions</h1>
+    
     <div class="p3">
-    <p>
-    <p>The computer will choose any random number between 1 and the range you have specified. 
-        So you will specify the end of the range maybe 10, 20, 100, 1000 etc.</p> 
-    <p> Then the you will try to guess the right number. </p>
-    <p>If the user failed to enter the random number chosen by the computer then the user will get a hint.</p>
-    <p>The <strong>hints </strong> will be like these:
+        <div>
+        <ol>
+            <li> <p> After clicking play in the <strong>Home tab </strong>.</p> </li>
+                <li> <p> First you will submit the range you want to guess the random number from. For example 1 to 10, 10 to 100 etc.</p> </li>
+                <li> <p> A random number will be choosen from the range you have specified. </p> </li>
+                <li> <p> Then try and guess the random number, by submitting your guesses. </p> </li>
+                <li> <p>If you fail to guess the random number correctly, <strong>hints</strong> will be provided for you.</p> </li>
+        </ol>
+        </div>
+
+                <p>The following are the hints:
+    <div>
         <ul>
-            <li>Your guess was low, please enter a higher number.</li>
+            <li>Your guess was low, please enter a higher number</li>
             <li>Your guess was high, please enter a lower number</li>
             <li>The comp_number is a multiple of  2</li>
             <li>The comp_number is a multiple of  3</li>
             <li>The comp_number is a multiple of  5</li>
-        </ul>   
+        </ul> 
+    </div>  
     </p> 
-        <p>  
-        With the help of these hints, you have to find the random number choosen by the computer.</p>
-        
-        <p>When you will enter the right random number chosen by the computer you will get an output like this:
-        <br> <strong>Yeah you\'ve got it, this is your score</strong> </p>
+        <p> With the help of these hints, I hope you will be able to guess the random number.</p>
+
+        <p> When you enter the correct random number, you will receive the following message <strong>Yeah you\'ve got it, this is your score</strong> </p>
     </div>
 </body>
 </html>

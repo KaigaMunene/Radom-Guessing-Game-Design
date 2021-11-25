@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Guessing Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="input">
+    <nav class="input-nav">
+        <div class="logo">
+            <a href="index.html" class="h3"><h3>Guessing-Game</h3></a>
+        </div>
+        <ul class="mynav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Instructions.html">Instructions</a></li>
+        </ul>
+    </nav>
+
+    <div class="input-header">
+        <h1>I am thinking of a number, can you guess it ?</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="step-row">
+            <div id="progress"></div>
+            <div class="step-col"><small>Step 1</small></div>
+            <div class="step-col"><small>Step 2</small></div>
+            <div class="step-col"><small>Step 3</small></div>
+        </div>
+
+    <div>
+        <form onsubmit="rangeOnSubmit(event)" id="form-1">
+            <label for="range" id="range-label">Enter the range:</label>
+            <input type="number" id="start" placeholder="start-range" name="start-range"/>  To
+            <input type="number" id="stop" placeholder="stop-range" name="stop-range"/>
+            
+            <div class="btn-box">
+                <button type="submit" id="Next-1">Next</button>
+
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <form onsubmit="handleOnSubmit(event)" id="form-2">
+            <label for="guess" >Guess a Number</label>
+            <input type="number" id="guess" placeholder="guess a number" name="guess" >
+            
+            <div id="message">
+                <p>Hints:</p>
+                <ol id="hints"></ol>
+            </div>
+
+            <div class="btn-box">
+                <button type="button" id="Back1">Back</button>
+                <button type="submit" id="Next2">Submit</button>
+            </div>
+        </form>
+    </div>
+
+        <div id="score">
+            <p>You have guessed correctly!</p>
+            <p>Your score is <span id="userScore"></span></p>
+            <div class="btn-box">
+                <button type="button" id="back2">New Game</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    let form1 = document.getElementById("form-1");
+    let form2 = document.getElementById("form-2");
+    let score = document.getElementById("score");
+
+    let Next1 = document.getElementById("Next-1");
+    let Back1 = document.getElementById("Back1");
+
+    let Next2 = document.getElementById("Next2");
+    let Back2 = document.getElementById("Back2");
+
+    let progress = document.getElementById("progress");
+    let userScore = document.getElementById("userScore")
+
+    let hints = document.getElementById("hints")
+
+    Next1.onclick = () => {
+        form1.style.left = "-450px";
+        form2.style.left = "40px";
+        progress.style.left = "120px"
+    }
+
+    Back1.onclick = () => {
+        form1.style.left = "40px";
+        form2.style.left = "450px";
+        progress.style.left = "0px";
+    }
+
+    Back2.onclick = () => {
+        form2.style.left = "40px";
+        score.style.display = "none";
+        progress.style.left = "0px";
+    }
+
+    const guess = document.getElementById("guess");
+    const startrange = document.getElementById("start");
+    const stoprange = document.getElementById("stop");
+
+    function handleOnSubmit (event) {
+        event.preventDefault()
+        let data = JSON.stringify({"guess": guess.value});
+
+        fetch("http://127.0.0.1:5000/guess", {
+            method: "POST",
+            credentialS: "include",
+            headers: {
+                "Accept" : "application/json",
+                "Content-Type": "application/json"
+            },
+            body: data,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if (data.message === 'correct') { 
+                form2.style.left = "-450px";
+                score.style.display = "block";
+                progress.style.left = "240px";
+                userScore.innerText = data.score;
+            }
+            else{
+                guess.value = '';
+                let node = document.createElement("p")
+                let textnode = document.createTextNode(data.message);
+                node.appendChild(textnode);
+                message.appendChild(node);
+                
+                hints.innerText = '';
+
+                for(let i = 0; i < data.hints.length; i++){
+                    let node = document.createElement("LI");                
+                    let textnode = document.createTextNode(data.hints[i]);         
+                    node.appendChild(textnode);                             
+                    hints.appendChild(node);
+                }
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    function rangeOnSubmit(event) {
+        event.preventDefault()
+
+        let data = JSON.stringify({"rangestart": startrange.value, "rangestop": stoprange.value});
+
+        fetch("http://127.0.0.1:5000/range", {
+            method: 'POST', 
+            credentials: 'include',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: data,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    }
+
+</script>
+</body>
+</html>
