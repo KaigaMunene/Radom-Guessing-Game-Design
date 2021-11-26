@@ -11,13 +11,15 @@
 }
 
 .head2 {
-    color: rgba(0, 255, 255, 0.582);
+    color: rgba(255, 255, 255, 0.63);
     text-align: center;
+    text-transform: uppercase;
 }
 
 .head3 {
     text-align: center;
-    color: rgba(179, 245, 240, 0.884);
+    color: rgba(255, 255, 255, 0.589);
+    text-transform: uppercase;
 }
 
 .input-header {
@@ -30,8 +32,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #219ebc;
+    color:#fff;
     font-size: 1.5em;
+    padding: 100px 20px 100px 20px;
 }
 
 .p2 {
@@ -39,36 +42,39 @@
    padding: 2em;
    text-align: justify;
    font-size: 18px;
+   line-height: 1.8;
 }
 
 .p3 {
     padding: 2em;
-    color: rgba(245, 222, 179, 0.877) ;
+    color: rgba(255, 255, 255, 0.692);
     text-align: justify;
+    line-height: 1.8;
 }
 
 .h2{
-    color: rgba(245, 222, 179, 0.884);
+    color: rgba(255, 255, 255, 0.521);
 }
 
-h3 {
+.h3 {
     text-decoration: none;
+    color: #fff;
 }
 
-@media (min-width: 480px) and (max-width: 1024px) {
+@media (min-width: 0px) and (max-width: 480px) {
     .body {
         background-image: url(Images/GUESS\ THE\ NUMBER\ \(1\).png);
     }
 }
-@media (min-width: 1025px) {
+@media (min-width: 481px) {
     .body {
 	    background-image: url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
    }
 }
 .body{
-    background-repeat: no-repeat;
+    background: linear-gradient(180deg, #000000a6, #000000a6), url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
     background-size: cover;
-    padding: 15px;
+    padding: 10px;
     position: relative;
 }
 
@@ -77,16 +83,16 @@ h3 {
     background-position: top;
     background-size: cover;
     padding: 10px;
+    position: relative;
 }
 
 .instructions {
-    background: linear-gradient(#ff106023, #ffac0623),
+    background: linear-gradient(180deg, #000000a6, #000000a6),
     url(Images/Desktop-gaming-backgrounds-1080p-dosh-tosh.jpg);
-    background-repeat: no-repeat;
+    background-position: top;
     background-size: cover;
     padding: 10px;
     position: relative;
-
 }
 
 .input {
@@ -97,10 +103,12 @@ h3 {
     padding: 10px;
     position: relative; 
 }
+
 .input-nav{
     position: fixed;
     width: 100%;
 }
+
 nav {
     display: flex;
     justify-content: space-around;
@@ -145,8 +153,7 @@ nav {
     padding: 16px 30px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-   
+    border-radius: 5px; 
 }
 
 .btn:hover {background-color: #39a6b9}
@@ -166,6 +173,7 @@ nav {
     margin-bottom: 40px;
     color: #777;
 }
+
 .container form{
     width: 280px;
     position: absolute;

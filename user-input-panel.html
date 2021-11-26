@@ -13,19 +13,19 @@
         <div class="logo">
             <a href="index.html" class="h3"><h3>Guessing-Game</h3></a>
         </div>
+
         <ul class="mynav">
             <li><a href="index.html">Home</a></li>
             <li><a href="About.html">About</a></li>
             <li><a href="Instructions.html">Instructions</a></li>
         </ul>
-    </nav>
 
+    </nav>
     <div class="input-header">
         <h1>I am thinking of a number, can you guess it ?</h1>
     </div>
 
     <div class="container">
-
         <div class="step-row">
             <div id="progress"></div>
             <div class="step-col"><small>Step 1</small></div>
@@ -36,8 +36,9 @@
     <div>
         <form onsubmit="rangeOnSubmit(event)" id="form-1">
             <label for="range" id="range-label">Enter the range:</label>
-            <input type="number" id="start" placeholder="start-range" name="start-range"/>  To
-            <input type="number" id="stop" placeholder="stop-range" name="stop-range"/>
+            <input type="number"  min="0" oninput= "this.value = Math.abs(this.value)"
+                        id="start" placeholder="start-range" name="start-range"/>  To
+            <input type="number" min="0" id="stop" placeholder="stop-range" name="stop-range"/>
             
             <div class="btn-box">
                 <button type="submit" id="Next-1">Next</button>
@@ -48,11 +49,12 @@
 
     <div>
         <form onsubmit="handleOnSubmit(event)" id="form-2">
-            <label for="guess" >Guess a Number</label>
+            <label for="guess">Guess a Number</label>
             <input type="number" id="guess" placeholder="guess a number" name="guess" >
             
             <div id="message">
                 <p>Hints:</p>
+                <p id="output-message"></p>
                 <ol id="hints"></ol>
             </div>
 
@@ -72,6 +74,7 @@
         </div>
     </div>
 </div>
+
 <script>
 
     let form1 = document.getElementById("form-1");
@@ -82,17 +85,27 @@
     let Back1 = document.getElementById("Back1");
 
     let Next2 = document.getElementById("Next2");
-    let Back2 = document.getElementById("Back2");
+    let Back2 = document.getElementById("back2");
 
     let progress = document.getElementById("progress");
     let userScore = document.getElementById("userScore")
 
     let hints = document.getElementById("hints")
+    let message = document.getElementById("output-message")
+
+    const guess = document.getElementById("guess");
+    const startrange = document.getElementById("start");
+    const stoprange = document.getElementById("stop");
 
     Next1.onclick = () => {
-        form1.style.left = "-450px";
-        form2.style.left = "40px";
-        progress.style.left = "120px"
+        if (startrange < stoprange) {
+            form1.style.left = "-450px";
+            form2.style.left = "40px";
+            progress.style.left = "120px"
+        }
+        else {
+            console.log("Enter a smaller start range or smaller stop range")
+        }
     }
 
     Back1.onclick = () => {
@@ -102,16 +115,12 @@
     }
 
     Back2.onclick = () => {
-        form2.style.left = "40px";
+        form1.style.left = "40px";
         score.style.display = "none";
         progress.style.left = "0px";
     }
 
-    const guess = document.getElementById("guess");
-    const startrange = document.getElementById("start");
-    const stoprange = document.getElementById("stop");
-
-    function handleOnSubmit (event) {
+    function handleOnSubmit(event){
         event.preventDefault()
         let data = JSON.stringify({"guess": guess.value});
 
@@ -120,13 +129,13 @@
             credentialS: "include",
             headers: {
                 "Accept" : "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
             body: data,
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data);
             if (data.message === 'correct') { 
                 form2.style.left = "-450px";
                 score.style.display = "block";
@@ -135,10 +144,7 @@
             }
             else{
                 guess.value = '';
-                let node = document.createElement("p")
-                let textnode = document.createTextNode(data.message);
-                node.appendChild(textnode);
-                message.appendChild(node);
+                message.innerText = data.message
                 
                 hints.innerText = '';
 
@@ -176,7 +182,6 @@
         .catch((error) => {
             console.error('Error:', error);
         });
-
     }
 
 </script>
