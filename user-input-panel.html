@@ -34,14 +34,14 @@
         </div>
 
     <div>
-        <form onsubmit="rangeOnSubmit(event)" id="form-1">
+        <form id="form-1">
             <label for="range" id="range-label">Enter the range:</label>
             <input type="number"  min="0" oninput= "this.value = Math.abs(this.value)"
                         id="start" placeholder="start-range" name="start-range"/>  To
             <input type="number" min="0" id="stop" placeholder="stop-range" name="stop-range"/>
             
             <div class="btn-box">
-                <button type="submit" id="Next-1">Next</button>
+                <button type="button" id="Next-1">Next</button>
 
             </div>
         </form>
@@ -54,6 +54,7 @@
             
             <div id="message">
                 <p>Hints:</p>
+                <p id="info"></p>
                 <p id="output-message"></p>
                 <ol id="hints"></ol>
             </div>
@@ -92,29 +93,33 @@
 
     let hints = document.getElementById("hints")
     let message = document.getElementById("output-message")
+    let info = document.getElementById("info")
+
 
     const guess = document.getElementById("guess");
     const startrange = document.getElementById("start");
     const stoprange = document.getElementById("stop");
+    
 
-    Next1.onclick = () => {
-        if (startrange < stoprange) {
+    Next1.onclick = () => {  /* fuction for when you click next after iserting range*/
+        if (parseInt(startrange.value) < parseInt(stoprange.value)) {
             form1.style.left = "-450px";
             form2.style.left = "40px";
-            progress.style.left = "120px"
+            progress.style.left = "120px";
+            rangeOnSubmit()
         }
         else {
             console.log("Enter a smaller start range or smaller stop range")
         }
     }
 
-    Back1.onclick = () => {
+    Back1.onclick = () => { /* fuction for when you click back from the guess form in step 2*/
         form1.style.left = "40px";
         form2.style.left = "450px";
         progress.style.left = "0px";
     }
 
-    Back2.onclick = () => {
+    Back2.onclick = () => {  /* fuction for when you click newgame it takes you to step1*/
         form1.style.left = "40px";
         score.style.display = "none";
         progress.style.left = "0px";
@@ -122,49 +127,61 @@
 
     function handleOnSubmit(event){
         event.preventDefault()
-        let data = JSON.stringify({"guess": guess.value});
+        message.innerHTML = ""
+        
+        /*function for when the guess is submited, to post and fetch data from flask app*/
 
-        fetch("http://127.0.0.1:5000/guess", {
-            method: "POST",
-            credentialS: "include",
-            headers: {
-                "Accept" : "application/json",
-                "Content-Type": "application/json",
-            },
-            body: data,
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if (data.message === 'correct') { 
-                form2.style.left = "-450px";
-                score.style.display = "block";
-                progress.style.left = "240px";
-                userScore.innerText = data.score;
-            }
-            else{
-                guess.value = '';
-                message.innerText = data.message
-                
-                hints.innerText = '';
+        if (parseInt(guess.value) >= parseInt(startrange.value) && parseInt(guess.value) <= parseInt(stoprange.value)){
+            let data = JSON.stringify({"guess": guess.value});
 
-                for(let i = 0; i < data.hints.length; i++){
-                    let node = document.createElement("LI");                
-                    let textnode = document.createTextNode(data.hints[i]);         
-                    node.appendChild(textnode);                             
-                    hints.appendChild(node);
+            guess.value = '';
+            startrange.value = "";
+            stoprange.value = "";
+            fetch("http://127.0.0.1:5000/guess", {
+                method: "POST",
+                credentialS: "include",
+                headers: {
+                    "Accept" : "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: data,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.message === 'correct') { 
+                    form2.style.left = "-450px";
+                    score.style.display = "block";
+                    progress.style.left = "240px";
+                    userScore.innerText = data.score;
+                   
                 }
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+                else{
+
+                    message.innerText = data.message
+                    hints.innerText = '';
+
+                    for(let i = 0; i < data.hints.length; i++){
+                        let node = document.createElement("LI");                
+                        let textnode = document.createTextNode(data.hints[i]);         
+                        node.appendChild(textnode);                             
+                        hints.appendChild(node);
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        else {
+            info.innerText ="Enter guess within the range";
+        }
     }
 
-    function rangeOnSubmit(event) {
-        event.preventDefault()
-
+    function rangeOnSubmit() {
         let data = JSON.stringify({"rangestart": startrange.value, "rangestop": stoprange.value});
+
+        /* function to fetch and post the range submitted by the user*/
 
         fetch("http://127.0.0.1:5000/range", {
             method: 'POST', 
