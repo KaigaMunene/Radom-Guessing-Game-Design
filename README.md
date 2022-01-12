@@ -11,3 +11,5 @@ It has various files i.e :
 * instructions.html - contains the instructions to follow in the game, which are easy to understand.
 
 * input-panel.html - its the page where the user or gamer plays the game in.
+
+The outlook for the site https://kaigamunene.github.io/Random-Number-Guessing-Game-Design/
